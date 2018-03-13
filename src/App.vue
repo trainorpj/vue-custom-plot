@@ -12,7 +12,7 @@
               :cx="d.scX"
               :cy="d.scY"
               :r="8"
-              :fill="`rgba(77, 77, 177, ${Math.abs(d.y)})`">
+              :fill="`rgba(77, 77, 177, ${Math.abs(d.other.z)})`">
           </circle>
         </template>
       </ChartView>
@@ -22,11 +22,9 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld"
 import Vue from "vue"
 import Component from "vue-class-component"
-import ChartProvider from "./components/ChartProvider"
-import ChartView from "./components/ChartView"
+import { ChartProvider, ChartView } from "./components"
 import { range } from "d3-array"
 
 const interval = range(-Math.PI, Math.PI, 0.5)
@@ -43,7 +41,6 @@ const data3d = interval
 
 @Component({
   components: {
-    HelloWorld,
     ChartProvider,
     ChartView
   }
