@@ -1,0 +1,1 @@
+export { makeGetterFromAccessor } from "./makeGetterFromAccessor";

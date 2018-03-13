@@ -1,4 +1,4 @@
-# Vue Scatter Plot
+# vue-custom-plot
 
 A vue component for making custom scatter plots. It uses a scoped slot to give you full control over what your plot renders.
 
