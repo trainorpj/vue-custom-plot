@@ -1,27 +1,13 @@
 # vue-custom-plot
 
-> A Vue.js project
+A vue component for making custom scatter plots. It uses a scoped slot to give you full control over what your plot renders.
 
-## Build Setup
+Most of the development is happening on the [prototype branch](https://github.com/trainorpj/vue-custom-plot/tree/prototype).
 
-``` bash
-# install dependencies
-npm install
+[See this thread for more info](https://twitter.com/pj_trainor/status/972930303374307328)
 
-# serve with hot reload at localhost:8080
-npm run dev
+Check out these demos:
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+1.  [First cut](https://codesandbox.io/s/n98jqj84jl))
+2.  [Introduce chart-provider](https://codesandbox.io/s/l34zj5x82l)
+3.  [Scoped Slots are nuts](https://codesandbox.io/s/2jq8q63ryj)
