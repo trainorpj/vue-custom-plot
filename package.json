@@ -4,7 +4,7 @@
   "description": "A Vue.js project",
   "author": "PJ Trainor",
   "private": true,
-  "main": "dist/CustomChart.js",
+  "main": "dist/CustomPlot.js",
   "files": ["dist"],
   "scripts": {
     "dev":

@@ -1,9 +1,10 @@
 module.exports = {
   entry: "./src/components/index.js",
   filename: {
-    js: "MyComponent.js"
+    js: "CustomPlot.js"
   },
   sourceMap: false,
+  postcss: false,
   html: false,
   format: "cjs"
 }
