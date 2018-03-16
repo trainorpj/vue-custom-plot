@@ -6,5 +6,5 @@ module.exports = {
   sourceMap: false,
   postcss: false,
   html: false,
-  format: "cjs"
+  format: "umd"
 }
