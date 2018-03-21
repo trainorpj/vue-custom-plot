@@ -1,24 +1,36 @@
+<template>
+  <g>
+    <slot name="axis-ticks" v-for="t in axisTicks" v-bind="t">
+    </slot>
+  </g>
+</template>
+
+
 <script>
-export default {
-  functional: true,
-  render: (h, { props }) => {
-    const { scale, top, left } = props
+import Vue from "vue"
+import { Component, Prop } from "vue-property-decorator"
 
-    let values = scale.ticks()
+import { makeArrayFromTicks } from "./utils"
 
-    return (
-      <g transform={`translate(${left},${top})`}>
-        {values.map((val, i) => {
-          const x = scale(val)
+@Component({})
+export default class Axis extends Vue {
+  @Prop() scale
+  @Prop() ticks
+  @Prop({ default: 0, type: Number })
+  top
+  @Prop({ default: 0, type: Number })
+  left
 
-          return (
-            <g transform={`translate(${x}, 10)`}>
-              <text text-anchor="middle">{val.toFixed(1)}</text>
-            </g>
-          )
-        })}
-      </g>
-    )
+  get axisTicks() {
+    const tickCount = makeArrayFromTicks({
+      scale: this.scale,
+      ticks: this.ticks
+    })
+
+    return tickCount.map((d, i) => ({
+      pos: this.scale(d),
+      val: d
+    }))
   }
 }
 </script>

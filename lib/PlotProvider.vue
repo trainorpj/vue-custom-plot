@@ -36,16 +36,16 @@ export default class ChartProvider extends Vue {
   @Prop({ default: 500, type: Number })
   height
 
-  @Prop({ default: 20, type: Number })
+  @Prop({ default: 0, type: Number })
   marginLeft
 
-  @Prop({ default: 20, type: Number })
+  @Prop({ default: 0, type: Number })
   marginRight
 
-  @Prop({ default: 20, type: Number })
+  @Prop({ default: 0, type: Number })
   marginTop
 
-  @Prop({ default: 20, type: Number })
+  @Prop({ default: 0, type: Number })
   marginBottom
 
   // dimensions - r for rendered, o for original

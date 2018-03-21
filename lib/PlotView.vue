@@ -4,7 +4,8 @@
       <!-- fallback content is a circle -->
       <circle :cx="d.x" :cy="d.y" :r="radius" :fill="fill"></circle>
     </slot>
-    <slot name="axes"></slot>
+    <slot name="x-axis"></slot>
+    <slot name="y-axis"></slot>
   </g>
 </template>
 
