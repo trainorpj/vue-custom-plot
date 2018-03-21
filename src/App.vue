@@ -5,8 +5,8 @@
     <provider :xy-data="data3d" :width="width" :height="height">
         <renderer
           slot="provider"
-          slot-scope="prop"
-          :render-data="prop.computedData">
+          slot-scope="props"
+          :render-data="props.computedData">
           <template slot="point" slot-scope="d">
             <circle
                 :cx="d.scX"
@@ -15,6 +15,9 @@
                 :fill="`rgba(77, 77, 177, ${Math.abs(d.other.z)})`">
             </circle>
           </template>
+          <g slot="axes">
+            <axis :top="props.svg.height" :scale="props.xScale" :left="props.svg.left"></axis>
+          </g>
         </renderer>
     </provider>
     </svg>
@@ -24,7 +27,7 @@
 <script>
 import Vue from "vue"
 import Component from "vue-class-component"
-import { PlotProvider, PlotView } from "../lib"
+import { PlotProvider, PlotView, Axis } from "../lib"
 import { range } from "d3-array"
 
 const interval = range(-Math.PI, Math.PI, 0.5)
@@ -42,7 +45,8 @@ const data3d = interval
 @Component({
   components: {
     provider: PlotProvider,
-    renderer: PlotView
+    renderer: PlotView,
+    axis: Axis
   }
 })
 export default class App extends Vue {
