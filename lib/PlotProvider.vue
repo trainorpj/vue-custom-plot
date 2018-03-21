@@ -2,6 +2,7 @@
 <g>
   <slot name="provider" v-bind="{computedData, xScale, yScale, dim}">
   </slot>
+  <Axis :scale="xScale" :left="dim.r.left" :top="dim.r.height"></Axis>
 </g>
 </template>
 
@@ -12,8 +13,11 @@ import { scaleLinear } from "d3-scale"
 import { extent } from "d3-array"
 
 import { makeGetterFromAccessor } from "./utils"
+import Axis from "./Axis"
 
-@Component({})
+@Component({
+  components: { Axis }
+})
 export default class ChartProvider extends Vue {
   // required prop: xyData
   @Prop([Array])

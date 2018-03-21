@@ -3,19 +3,19 @@
     <h1>Let's make a sick chart</h1>
     <svg :width="width" :height="height">
     <provider :xy-data="data3d" :width="width" :height="height">
-      <renderer
-        slot="provider"
-        slot-scope="prop"
-        :render-data="prop.computedData">
-        <template slot="point" slot-scope="d">
-          <circle
-              :cx="d.scX"
-              :cy="d.scY"
-              :r="8"
-              :fill="`rgba(77, 77, 177, ${Math.abs(d.other.z)})`">
-          </circle>
-        </template>
-      </renderer>
+        <renderer
+          slot="provider"
+          slot-scope="prop"
+          :render-data="prop.computedData">
+          <template slot="point" slot-scope="d">
+            <circle
+                :cx="d.scX"
+                :cy="d.scY"
+                :r="8"
+                :fill="`rgba(77, 77, 177, ${Math.abs(d.other.z)})`">
+            </circle>
+          </template>
+        </renderer>
     </provider>
     </svg>
   </div>
