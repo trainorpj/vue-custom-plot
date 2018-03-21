@@ -1,6 +1,6 @@
 <template>
 <g>
-  <slot name="provider" v-bind="{computedData, xScale, yScale, dim}">
+  <slot name="provider" v-bind="{computedData, xScale, yScale, svg}">
   </slot>
 </g>
 </template>
@@ -12,8 +12,11 @@ import { scaleLinear } from "d3-scale"
 import { extent } from "d3-array"
 
 import { makeGetterFromAccessor } from "./utils"
+import Axis from "./Axis"
 
-@Component({})
+@Component({
+  components: { Axis }
+})
 export default class ChartProvider extends Vue {
   // required prop: xyData
   @Prop([Array])
@@ -33,35 +36,25 @@ export default class ChartProvider extends Vue {
   @Prop({ default: 500, type: Number })
   height
 
-  @Prop({ default: 20, type: Number })
+  @Prop({ default: 0, type: Number })
   marginLeft
 
-  @Prop({ default: 20, type: Number })
+  @Prop({ default: 0, type: Number })
   marginRight
 
-  @Prop({ default: 20, type: Number })
+  @Prop({ default: 0, type: Number })
   marginTop
 
-  @Prop({ default: 20, type: Number })
+  @Prop({ default: 0, type: Number })
   marginBottom
 
   // dimensions - r for rendered, o for original
-  get dim() {
+  get svg() {
     return {
-      r: {
-        width: this.width - this.marginLeft - this.marginRight,
-        height: this.height - this.marginTop - this.marginBottom,
-        left: this.marginLeft,
-        top: this.marginTop
-      },
-      o: {
-        width: this.width,
-        height: this.height,
-        marginLeft: this.marginLeft,
-        marginTop: this.marginTop,
-        marginRight: this.marginRight,
-        marginBottom: this.marginBottom
-      }
+      width: this.width - this.marginLeft - this.marginRight,
+      height: this.height - this.marginTop - this.marginBottom,
+      left: this.marginLeft,
+      top: this.marginTop
     }
   }
 
@@ -78,13 +71,13 @@ export default class ChartProvider extends Vue {
   get xScale() {
     return scaleLinear()
       .domain(extent(this.xyData, this.xGetter))
-      .range([this.dim.r.left, this.dim.r.width])
+      .range([this.svg.left, this.svg.width])
   }
 
   get yScale() {
     return scaleLinear()
       .domain(extent(this.xyData, this.yGetter))
-      .range([this.dim.r.height, this.dim.r.top])
+      .range([this.svg.height, this.svg.top])
   }
 
   // computed data
