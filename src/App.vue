@@ -2,8 +2,8 @@
   <div id="app">
     <h1>Let's make a sick chart</h1>
     <svg :width="width" :height="height">
-    <ChartProvider :xy-data="data3d" :width="width" :height="height">
-      <ChartView
+    <provider :xy-data="data3d" :width="width" :height="height">
+      <renderer
         slot="provider"
         slot-scope="prop"
         :render-data="prop.computedData">
@@ -15,8 +15,8 @@
               :fill="`rgba(77, 77, 177, ${Math.abs(d.other.z)})`">
           </circle>
         </template>
-      </ChartView>
-    </ChartProvider>
+      </renderer>
+    </provider>
     </svg>
   </div>
 </template>
@@ -24,7 +24,7 @@
 <script>
 import Vue from "vue"
 import Component from "vue-class-component"
-import { ChartProvider, ChartView } from "./components"
+import { PlotProvider, PlotView } from "../lib"
 import { range } from "d3-array"
 
 const interval = range(-Math.PI, Math.PI, 0.5)
@@ -41,8 +41,8 @@ const data3d = interval
 
 @Component({
   components: {
-    ChartProvider,
-    ChartView
+    provider: PlotProvider,
+    renderer: PlotView
   }
 })
 export default class App extends Vue {

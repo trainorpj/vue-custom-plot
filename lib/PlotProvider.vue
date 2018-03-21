@@ -11,16 +11,10 @@ import { Component, Prop } from "vue-property-decorator"
 import { scaleLinear } from "d3-scale"
 import { extent } from "d3-array"
 
-import { makeGetterFromAccessor } from "../utils"
+import { makeGetterFromAccessor } from "./utils"
 
 @Component({})
 export default class ChartProvider extends Vue {
-  /**
-|--------------------------------------------------
-| Props
-|--------------------------------------------------
-*/
-
   // required prop: xyData
   @Prop([Array])
   xyData
@@ -50,12 +44,6 @@ export default class ChartProvider extends Vue {
 
   @Prop({ default: 20, type: Number })
   marginBottom
-
-  /**
-  |--------------------------------------------------
-  | Computed Properties
-  |--------------------------------------------------
-  */
 
   // dimensions - r for rendered, o for original
   get dim() {

@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./src/components/index.js",
+  entry: "./lib/index.js",
   filename: {
     js: "CustomPlot.js"
   },
