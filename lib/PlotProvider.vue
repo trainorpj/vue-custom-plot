@@ -86,9 +86,9 @@ export default class ChartProvider extends Vue {
       key: i,
       x: this.xGetter(d),
       y: this.yGetter(d),
-      scX: this.xScale(this.xGetter(d)),
-      scY: this.yScale(this.yGetter(d)),
-      other: {
+      svgx: this.xScale(this.xGetter(d)),
+      svgy: this.yScale(this.yGetter(d)),
+      attrs: {
         ...d
       }
     }))

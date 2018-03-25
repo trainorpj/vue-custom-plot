@@ -9,10 +9,10 @@
           :render-data="props.computedData">
           <template slot="point" slot-scope="d">
             <circle
-                :cx="d.scX"
-                :cy="d.scY"
+                :cx="d.svgx"
+                :cy="d.svgy"
                 :r="8"
-                :fill="`rgba(77, 77, 177, ${Math.abs(d.other.z)})`">
+                :fill="`rgba(77, 77, 177, ${Math.abs(d.attrs.z)})`">
             </circle>
           </template>
           <axis slot="x-axis" :scale="props.xScale" :ticks="interval">
