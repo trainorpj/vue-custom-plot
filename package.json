@@ -1,6 +1,6 @@
 {
   "name": "vue-custom-plot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Vue.js project",
   "author": "PJ Trainor",
   "main": "dist/CustomPlot.js",
