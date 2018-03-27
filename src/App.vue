@@ -1,38 +1,47 @@
 <template>
   <div id="app">
-    <h1>Let's make a sick chart</h1>
+    <h1>Let's make a chart</h1>
     <svg :width="width" :height="height">
-    <provider :xy-data="data3d" :width="width" :height="height" :marginLeft="margin" :marginTop="margin">
-        <renderer
-          slot="provider"
-          slot-scope="props"
-          :render-data="props.computedData">
-          <template slot="point" slot-scope="d">
-            <circle
-                :cx="d.scX"
-                :cy="d.scY"
-                :r="8"
-                :fill="`rgba(77, 77, 177, ${Math.abs(d.other.z)})`">
-            </circle>
-          </template>
-          <axis slot="x-axis" :scale="props.xScale" :ticks="interval">
-            <g slot="axis-ticks" slot-scope="xt">
-                <text :x="xt.pos" :y="props.svg.height" :font-size="12" text-anchor="middle">
-                  {{xt.val.toFixed(2)}}
-                </text>
-                <line :x1="xt.pos" :y1="props.svg.height - 11" :x2="xt.pos" :y2="props.svg.top" :stroke-width="1" stroke="#7ba7b5"></line>
-            </g>
-          </axis>
-          <axis slot="y-axis" :scale="props.yScale" :ticks="15">
-            <g slot="axis-ticks" slot-scope="yt">
-              <text :y="yt.pos" :x="props.svg.left - 15" text-anchor="end" :font-size="12">
-                {{yt.val}}
-              </text>
-              <line :x1="props.svg.left" :y1="yt.pos" :x2="props.svg.width" :y2="yt.pos" :stroke-width="1" stroke="#7ba7b5"></line>
-            </g>
-          </axis>
-        </renderer>
-    </provider>
+      <rect :width="width" :height="height" :rx="15" :ry="15" fill="plum"></rect>
+      <custom-plot :xy-data="data3d" :width="width" :height="height" :marginLeft="margin" :marginTop="margin">
+      <g slot-scope="{computedData, xScale, yScale, svg}">
+        <g v-for="d in computedData" :key="d.key">
+          <circle
+            :key="`c-${d.key}`"
+            :cx="d.svgx"
+            :cy="d.svgy"
+            :fill="color(d.attrs.z)"
+            :r="d.attrs.active ? 30 : 10"
+            stroke="white"
+          ></circle>
+        </g>
+        <axis :scale="xScale" :ticks="interval">
+          <g slot-scope="{ticks}">
+            <text v-for="xt in ticks"
+            :key="`xt-${xt.key}`"
+            :font-size="12"
+            text-anchor="middle"
+            :x="xt.pos"
+            :y="svg.height + svg.top - margin / 2">
+              {{xt.val.toFixed(2)}}
+            </text>
+          </g>
+        </axis>
+        <axis :scale="yScale" :ticks="interval">
+          <g slot-scope="{ticks}">
+            <text v-for="yt in ticks" :key="`yt-${yt.key}`"
+            :font-size="12"
+            text-anchor="end"
+            :x="svg.left"
+            :y="yt.pos"
+            dominant-baseline="central"
+            :dx="-20">
+              {{yt.val.toFixed(2)}}
+            </text>
+          </g>
+        </axis>
+      </g>
+      </custom-plot>
     </svg>
   </div>
 </template>
@@ -40,8 +49,9 @@
 <script>
 import Vue from "vue"
 import Component from "vue-class-component"
-import { PlotProvider, PlotView, Axis } from "../lib"
 import { range } from "d3-array"
+import { interpolatePlasma } from "d3-scale-chromatic"
+import { CustomPlot, Axis } from "../lib"
 
 const interval = range(-Math.PI, Math.PI, 0.5)
 
@@ -57,18 +67,21 @@ const data3d = interval
 
 @Component({
   components: {
-    provider: PlotProvider,
-    renderer: PlotView,
-    axis: Axis
+    axis: Axis,
+    "custom-plot": CustomPlot
   }
 })
 export default class App extends Vue {
   name = "App"
   data3d = data3d
   interval = interval
-  width = 500
-  height = 500
-  margin = 50
+  width = 600
+  height = 600
+  margin = 70
+
+  color(z) {
+    return interpolatePlasma(Math.abs(z))
+  }
 }
 </script>
 
