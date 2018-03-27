@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Let's make a sick chart</h1>
+    <h1>Let's make a chart</h1>
     <svg :width="width" :height="height">
       <rect :width="width" :height="height" :rx="15" :ry="15" fill="plum"></rect>
       <custom-plot :xy-data="data3d" :width="width" :height="height" :marginLeft="margin" :marginTop="margin">
@@ -11,8 +11,8 @@
             :cx="d.svgx"
             :cy="d.svgy"
             :fill="color(d.attrs.z)"
-            :r="10"
-            stroke="navy"
+            :r="d.attrs.active ? 30 : 10"
+            stroke="white"
           ></circle>
         </g>
         <axis :scale="xScale" :ticks="interval">
@@ -22,7 +22,7 @@
             :font-size="12"
             text-anchor="middle"
             :x="xt.pos"
-            :y="svg.height + svg.top - 10">
+            :y="svg.height + svg.top - margin / 2">
               {{xt.val.toFixed(2)}}
             </text>
           </g>
@@ -75,9 +75,9 @@ export default class App extends Vue {
   name = "App"
   data3d = data3d
   interval = interval
-  width = 500
-  height = 500
-  margin = 50
+  width = 600
+  height = 600
+  margin = 70
 
   color(z) {
     return interpolatePlasma(Math.abs(z))
