@@ -11,8 +11,9 @@
             :cx="d.svgx"
             :cy="d.svgy"
             :fill="color(d.attrs.z)"
-            :r="d.attrs.active ? 30 : 10"
+            :r="d.attrs.active ? 15 : 10 "
             stroke="white"
+            @click="toggle(d)"
           ></circle>
         </g>
         <axis :scale="xScale" :ticks="interval">
@@ -60,7 +61,8 @@ const data3d = interval
     return interval.map(y => ({
       x,
       y,
-      z: Math.cos(x) * Math.sin(y)
+      z: Math.cos(x) * Math.sin(y),
+      active: false
     }))
   })
   .reduce((acc, cur) => [...acc, ...cur], [])
@@ -81,6 +83,11 @@ export default class App extends Vue {
 
   color(z) {
     return interpolatePlasma(Math.abs(z))
+  }
+
+  toggle(item) {
+    item.attrs.active = !item.attrs.active
+    this.$forceUpdate()
   }
 }
 </script>
