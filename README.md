@@ -18,7 +18,9 @@ import { CustomPlot } from "vue-custom-plot"
 
 ## Usage
 
-You can follow along with **this example on [codesandbox](https://codesandbox.io/s/xllnyyjww)**. We're going to make a _really_ basic scatter plot that looks like this:
+**[Follow along with this example on codesandbox.](https://codesandbox.io/s/xllnyyjww?module=%2Fsrc%2FApp.vue)**
+
+We're going to make a _really_ basic scatter plot that looks like this:
 
 ![scatter plot preview](./assets/usage-preview.png)
 
@@ -130,7 +132,7 @@ We'll use `computedData` to visualize our data. We'll render circles whose opaci
   :xy-data="myData"
   :width="width"
   :x-accessor="'xVariableName'"
-  :y-accessor="d => doSomething(d.yVariable)"
+  :y-accessor="d => doSomethingTo(d.yVariable)"
   :height="height"
   :marginTop="margin"
   :marginLeft="margin">
@@ -166,6 +168,31 @@ We'll use `computedData` to visualize our data. We'll render circles whose opaci
 | xScale       | Function | Scale taking x-values to their svg-coordinates                           |
 | yScale       | Function | Scale taking y-values to their svg-coordinates                           |
 | svg          | Object   | Object with dimension data, `{left, top, width, height}`                 |
+
+Here's the relationship between `xyData` and `compuedData`:
+
+```js
+// xyData
+[{x, y, z, somethingElse}, ...]
+```
+
+```js
+// computedData
+[{
+  x // the original x-value, chosen with xAccessor
+  y // the original y-value, chosen with yAccessor
+  svgx // the original x-value passed through xScale
+  svgy // the original y-value passed through yScale
+  key // a simple key to use when rendering your data
+  attrs: {
+    // the original data goes in here
+    x // the original x-value, not chosen with xAccessor
+    y // the original y-value, not chosen with yAccessor
+    z // the original z-value
+    somethingElse // the original somethingElse-value
+  }
+} ... ]
+```
 
 ### `<Axis>`
 
