@@ -3,7 +3,13 @@
     <h1>Let's make a chart</h1>
     <svg :width="width" :height="height">
       <rect :width="width" :height="height" :rx="15" :ry="15" fill="plum"></rect>
-      <custom-plot :xy-data="data3d" :width="width" :height="height" :marginLeft="margin" :marginTop="margin">
+      <custom-plot
+        :xy-data="data3d"
+        :width="width"
+        :height="height"
+        :marginLeft="margin"
+        :marginTop="margin"
+        :xScaleprops="{ clamp: true }">
       <g slot-scope="{computedData, xScale, yScale, svg}">
         <g v-for="d in computedData" :key="d.key">
           <circle
