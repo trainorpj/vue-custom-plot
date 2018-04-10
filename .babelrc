@@ -20,6 +20,7 @@
     "test": {
       "presets": ["env", "stage-2"],
       "plugins": [
+        "transform-decorators-legacy",
         "transform-vue-jsx",
         "transform-es2015-modules-commonjs",
         "dynamic-import-node"
