@@ -1,13 +1,13 @@
 import { mount, shallow } from "@vue/test-utils"
-import PokePlot from "../../../src/components/PokePlot"
+import GridPlot from "../../../src/components/GridPlot"
 
 const factory = (values = {}) => {
-  return shallow(PokePlot, {
+  return shallow(GridPlot, {
     data: { ...values }
   })
 }
 
-describe("PokePlot", () => {
+describe("GridPlot", () => {
   it("renders the svg properly", () => {
     const wrapper = factory()
 
@@ -17,8 +17,8 @@ describe("PokePlot", () => {
   })
 
   it("renders a rect", () => {
-    const wrapper = mount(PokePlot)
+    const wrapper = mount(GridPlot)
 
-    expect(wrapper.find({ ref: `x-43-y-36` }).attributes().fill).toBe("#317373")
+    expect(wrapper.find({ ref: `x-0-y-1` }).attributes().fill).toBe("#41eeee")
   })
 })

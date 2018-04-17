@@ -3,7 +3,7 @@
 
       <CustomPlot
         id="pkmn-custom-plot"
-        :xy-data="pkmn"
+        :xy-data="grid"
         :width="w"
         :height="h"
         :marginLeft="margin"
@@ -38,7 +38,6 @@
 import Vue from "vue"
 import { Component, Prop } from "vue-property-decorator"
 import { CustomPlot } from "../../lib"
-import bulbasaur from "../../assets/bulbasaur.json"
 
 @Component({
   components: {
@@ -46,7 +45,28 @@ import bulbasaur from "../../assets/bulbasaur.json"
   }
 })
 export default class PokePlot extends Vue {
-  pkmn = bulbasaur
+  grid = [
+    {
+      x: 0,
+      y: 0,
+      c: "#03ff56"
+    },
+    {
+      x: 1,
+      y: 0,
+      c: "#ff554e"
+    },
+    {
+      x: 0,
+      y: 1,
+      c: "#41eeee"
+    },
+    {
+      x: 1,
+      y: 1,
+      c: 0
+    }
+  ]
   w = 500
   h = 500
   m = 50
