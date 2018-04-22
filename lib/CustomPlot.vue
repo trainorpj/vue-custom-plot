@@ -1,14 +1,14 @@
 <script>
-import { scaleLinear } from "d3-scale"
-import { extent } from "d3-array"
+import { scaleLinear } from 'd3-scale'
+import { extent } from 'd3-array'
 
-import { makeGetterFromAccessor, selectScaleFromProps } from "./utils"
+import { makeGetterFromAccessor, selectScaleFromProps } from './utils'
 
 export default {
   props: {
     xyData: Array,
-    xAccessor: { default: "x", type: [String, Function] },
-    yAccessor: { default: "y", type: [String, Function] },
+    xAccessor: { default: 'x', type: [String, Function] },
+    yAccessor: { default: 'y', type: [String, Function] },
     width: { default: 500, type: Number },
     height: { default: 500, type: Number },
     marginLeft: { default: 0, type: Number },
@@ -19,7 +19,7 @@ export default {
       type: Object,
       default: function() {
         return {
-          name: "Linear"
+          name: 'Linear'
         }
       }
     },
@@ -27,7 +27,7 @@ export default {
       type: Object,
       default: function() {
         return {
-          name: "Linear"
+          name: 'Linear'
         }
       }
     }
@@ -50,11 +50,11 @@ export default {
     xScale() {
       const scaleProps = {
         domain:
-          "domain" in this.xScaleProps
+          'domain' in this.xScaleProps
             ? this.xScaleProps.domain
             : extent(this.xyData, this.xGetter),
         range:
-          "range" in this.xScaleProps
+          'range' in this.xScaleProps
             ? this.xScaleProps.range
             : [this.svg.left, this.svg.width],
         ...this.xScaleProps
@@ -65,11 +65,11 @@ export default {
     yScale() {
       const scaleProps = {
         domain:
-          "domain" in this.yScaleProps
+          'domain' in this.yScaleProps
             ? this.yScaleProps.domain
             : extent(this.xyData, this.yGetter),
         range:
-          "range" in this.yScaleProps
+          'range' in this.yScaleProps
             ? this.yScaleProps.range
             : [this.svg.height, this.svg.top],
         ...this.yScaleProps

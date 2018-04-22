@@ -9,7 +9,7 @@
         :height="height"
         :marginLeft="margin"
         :marginTop="margin"
-        :xScaleprops="{ clamp: true }">
+        :xScaleProps="{ clamp: true }">
       <g slot-scope="{computedData, xScale, yScale, svg}">
         <g v-for="d in computedData" :key="d.key">
           <circle
