@@ -4,7 +4,7 @@ module.exports = {
   rootDir: path.resolve(__dirname, "../../"),
   moduleFileExtensions: ["js", "json", "vue"],
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/src/$1"
+    "^@/(.*)$": "<rootDir>/$1"
   },
   transform: {
     ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest",
