@@ -3,7 +3,13 @@
     <h1>Let's make a chart</h1>
     <svg :width="width" :height="height">
       <rect :width="width" :height="height" :rx="15" :ry="15" fill="plum"></rect>
-      <custom-plot :xy-data="data3d" :width="width" :height="height" :marginLeft="margin" :marginTop="margin">
+      <custom-plot
+        :xy-data="data3d"
+        :width="width"
+        :height="height"
+        :marginLeft="margin"
+        :marginTop="margin"
+        :xScaleProps="{ clamp: true }">
       <g slot-scope="{computedData, xScale, yScale, svg}">
         <g v-for="d in computedData" :key="d.key">
           <circle
@@ -13,7 +19,6 @@
             :fill="color(d.attrs.z)"
             :r="d.attrs.active ? 15 : 10 "
             stroke="white"
-            @click="toggle(d)"
           ></circle>
         </g>
         <axis :scale="xScale" :ticks="interval">
@@ -48,11 +53,11 @@
 </template>
 
 <script>
-import Vue from "vue"
-import Component from "vue-class-component"
-import { range } from "d3-array"
-import { interpolatePlasma } from "d3-scale-chromatic"
-import { CustomPlot, Axis } from "../lib"
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { range } from 'd3-array'
+import { interpolatePlasma } from 'd3-scale-chromatic'
+import { CustomPlot, Axis } from '../lib'
 
 const interval = range(-Math.PI, Math.PI, 0.5)
 
@@ -70,11 +75,11 @@ const data3d = interval
 @Component({
   components: {
     axis: Axis,
-    "custom-plot": CustomPlot
+    'custom-plot': CustomPlot
   }
 })
 export default class App extends Vue {
-  name = "App"
+  name = 'App'
   data3d = data3d
   interval = interval
   width = 600
@@ -84,17 +89,12 @@ export default class App extends Vue {
   color(z) {
     return interpolatePlasma(Math.abs(z))
   }
-
-  toggle(item) {
-    item.attrs.active = !item.attrs.active
-    this.$forceUpdate()
-  }
 }
 </script>
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

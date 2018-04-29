@@ -16,6 +16,7 @@
     "build": "poi build"
   },
   "dependencies": {
+    "@vx/scale": "0.0.153",
     "d3-array": "^1.2.1",
     "d3-scale": "^2.0.0",
     "d3-scale-chromatic": "^1.2.0",
