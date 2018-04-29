@@ -1,5 +1,4 @@
 <script>
-import { scaleLinear } from 'd3-scale'
 import { extent } from 'd3-array'
 
 import { makeGetterFromAccessor, selectScaleFromProps } from './utils'
