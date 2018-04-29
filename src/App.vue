@@ -19,7 +19,6 @@
             :fill="color(d.attrs.z)"
             :r="d.attrs.active ? 15 : 10 "
             stroke="white"
-            @click="toggle(d)"
           ></circle>
         </g>
         <axis :scale="xScale" :ticks="interval">
@@ -54,11 +53,11 @@
 </template>
 
 <script>
-import Vue from "vue"
-import Component from "vue-class-component"
-import { range } from "d3-array"
-import { interpolatePlasma } from "d3-scale-chromatic"
-import { CustomPlot, Axis } from "../lib"
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { range } from 'd3-array'
+import { interpolatePlasma } from 'd3-scale-chromatic'
+import { CustomPlot, Axis } from '../lib'
 
 const interval = range(-Math.PI, Math.PI, 0.5)
 
@@ -76,11 +75,11 @@ const data3d = interval
 @Component({
   components: {
     axis: Axis,
-    "custom-plot": CustomPlot
+    'custom-plot': CustomPlot
   }
 })
 export default class App extends Vue {
-  name = "App"
+  name = 'App'
   data3d = data3d
   interval = interval
   width = 600
@@ -90,17 +89,12 @@ export default class App extends Vue {
   color(z) {
     return interpolatePlasma(Math.abs(z))
   }
-
-  toggle(item) {
-    item.attrs.active = !item.attrs.active
-    this.$forceUpdate()
-  }
 }
 </script>
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
