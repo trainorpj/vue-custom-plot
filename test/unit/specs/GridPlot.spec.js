@@ -1,5 +1,5 @@
 import { mount, shallow } from "@vue/test-utils"
-import GridPlot from "../../../src/components/GridPlot"
+import GridPlot from "@/components/GridPlot"
 
 const factory = (values = {}) => {
   return shallow(GridPlot, {
