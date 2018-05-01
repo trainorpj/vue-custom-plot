@@ -1,7 +1,11 @@
 <script>
 import { extent } from 'd3-array'
 
-import { makeGetterFromAccessor, selectScaleFromProps } from './utils'
+import {
+  makeGetterFromAccessor,
+  makeScaleFromProps,
+  makeSvgObjectFromProps
+} from './utils'
 
 export default {
   props: {
@@ -33,12 +37,7 @@ export default {
   },
   computed: {
     svg() {
-      return {
-        width: this.width - this.marginLeft - this.marginRight,
-        height: this.height - this.marginTop - this.marginBottom,
-        left: this.marginLeft,
-        top: this.marginTop
-      }
+      return makeSvgObjectFromProps(this)
     },
     xGetter() {
       return makeGetterFromAccessor(this.xAccessor)
@@ -47,33 +46,24 @@ export default {
       return makeGetterFromAccessor(this.yAccessor)
     },
     xScale() {
-      const scaleProps = {
-        domain:
-          'domain' in this.xScaleProps
-            ? this.xScaleProps.domain
-            : extent(this.xyData, this.xGetter),
-        range:
-          'range' in this.xScaleProps
-            ? this.xScaleProps.range
-            : [this.svg.left, this.svg.width],
-        ...this.xScaleProps
-      }
+      const defaultDomain = extent(this.xyData, this.xGetter)
+      const defaultRange = [this.svg.left, this.svg.width]
 
-      return selectScaleFromProps(scaleProps)
+      return makeScaleFromProps({
+        defaultDomain,
+        defaultRange,
+        scaleProps: this.xScaleProps
+      })
     },
     yScale() {
-      const scaleProps = {
-        domain:
-          'domain' in this.yScaleProps
-            ? this.yScaleProps.domain
-            : extent(this.xyData, this.yGetter),
-        range:
-          'range' in this.yScaleProps
-            ? this.yScaleProps.range
-            : [this.svg.height, this.svg.top],
-        ...this.yScaleProps
-      }
-      return selectScaleFromProps(scaleProps)
+      const defaultDomain = extent(this.xyData, this.yGetter)
+      const defaultRange = [this.svg.height, this.svg.top]
+
+      return makeScaleFromProps({
+        defaultDomain,
+        defaultRange,
+        scaleProps: this.yScaleProps
+      })
     },
     computedData() {
       return this.xyData.map((d, i) => ({

@@ -1,5 +1,5 @@
 <script>
-import { makeArrayFromTicks } from "./utils"
+import { makeArrayFromTicks } from './utils'
 
 export default {
   props: {
