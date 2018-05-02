@@ -49,6 +49,28 @@
       </g>
       </custom-plot>
     </svg>
+    <svg :width="width" :height="height">
+      <rect :width="width" :height="height" :rx="15" :ry="15" fill="lightgreen"></rect>
+      <custom-plot
+        :xy-data="dataExp"
+        :width="width"
+        :height="height"
+        :marginLeft="margin"
+        :marginTop="margin"
+        :yAccessor="'fx'"
+        :yScaleProps="{ name: 'Log' }">
+        <g slot-scope="{computedData, xScale, svg}">
+          <rect v-for="(p, i) in computedData"
+          :key="`exp-${p.key}`"
+          :x="p.svgx"
+          :y="p.svgy"
+          :width="xScale.distance(0, 0.1)"
+          :height="svg.height - p.svgy"
+          :fill="i % 2 ? 'maroon' : 'darkblue'"
+          ></rect>
+        </g>
+      </custom-plot>
+    </svg>
   </div>
 </template>
 
@@ -72,6 +94,11 @@ const data3d = interval
   })
   .reduce((acc, cur) => [...acc, ...cur], [])
 
+const dataExp = range(0, 10, 0.1).map(d => ({
+  x: d,
+  fx: Math.pow(Math.E, d)
+}))
+
 @Component({
   components: {
     axis: Axis,
@@ -81,9 +108,10 @@ const data3d = interval
 export default class App extends Vue {
   name = 'App'
   data3d = data3d
+  dataExp = dataExp
   interval = interval
-  width = 600
-  height = 600
+  width = 400
+  height = 400
   margin = 70
 
   color(z) {
